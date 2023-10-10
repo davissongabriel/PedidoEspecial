@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
+<title>Pergunta Especial</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .question {
+    text-align: center;
+    color: #d23f3f;
+    margin-bottom: 20px;
+  }
+  .buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  .btn-yes {
+    background-color: #ffa500;
+    color: white;
+  }
+  .btn-no {
+    background-color: #d23f3f;
+    color: white;
+  }
+  .btn-no:hover {
+    transform: scale(1.1);
+  }
+#your-element-selector {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: -1;
+}
+#content {
+   position: relative;
+   z-index: 1;
+   padding: 20px;
+   color: white;
+   font-family: Arial, sans-serif;
+        }
+</style>
+</head>
+<body>
+<div id="your-element-selector"></div>
+<div class="question">
+  <h2>Quer namorar comigo?</h2>
+  <div class="buttons">
+    <button class="btn btn-yes" id="btn-yes">Sim</button>
+    <button class="btn btn-no" id="btn-no">Não</button>
+  </div>
+</div>
+<script>
+  const btnNo = document.getElementById('btn-no');
+  const btnYes = document.getElementById('btn-yes');
+  const maxMoveDistance = 50;
+  let movementCount = 0;
+  const maxMovements = 10; // Número máximo de movimentos do botão "Não".
+
+  function moveButton() {
+    if (movementCount >= maxMovements) {
+      btnNo.removeEventListener('mouseover', moveButton);
+      return;
+    }
+
+    const maxX = window.innerWidth - btnNo.offsetWidth;
+    const maxY = window.innerHeight - btnNo.offsetHeight;
+    const newX = Math.random() * maxX;
+    const newY = Math.random() * maxY;
+
+    const deltaX = Math.min(Math.abs(newX - btnNo.offsetLeft), maxMoveDistance);
+    const deltaY = Math.min(Math.abs(newY - btnNo.offsetTop), maxMoveDistance);
+
+    const moveX = newX < btnNo.offsetLeft ? -deltaX : deltaX;
+    const moveY = newY < btnNo.offsetTop ? -deltaY : deltaY;
+
+    btnNo.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    movementCount++;
+  }
+
+  function showMessage() {
+    alert("Faz uma forcinhaa  💖");
+  }
+
+  btnNo.addEventListener('mouseover', moveButton);
+  btnYes.addEventListener('click', showMessage);
+
+  btnNo.addEventListener('click', () => {
+  
+  btnNo.removeEventListener('mouseover', moveButton);
+  });
+</script>
+  <script>
+        // Inicialize o efeito Vanta.js como fundo da página
+      VANTA.NET({
+  el: "#your-element-selector",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.00,
+  scaleMobile: 1.00,
+  color: 0xf50000,
+  backgroundColor: 0x220707,
+  points: 8.00,
+  spacing: 20.00,
+  showDots: false
+})
+    </script>
+</body>
+</html>
